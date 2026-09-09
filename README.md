@@ -1,5 +1,13 @@
 # Lumina Blog - Professional Full-Stack Blog Application
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ApurvPandey0199/LuminaDashboard-Through-Java-)
+![Java 21](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.2-brightgreen?logo=springboot)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT%20%2B%20BCrypt-blue?logo=springsecurity)
+![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-blue?logo=mysql)
+![Frontend](https://img.shields.io/badge/Frontend-Vanilla%20JS%20%2F%20HTML5%20%2F%20CSS3-yellow?logo=javascript)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
 A production-grade, enterprise-ready Full-Stack Blog Application demonstrating modern software architecture, secure authentication, relational database integrity, and responsive frontend engineering.
 
 Built for technical evaluation to showcase mastery in **Java 21, Spring Boot 3, Spring Security 6, stateless JWT, BCrypt, Spring Data JPA, Hibernate, MySQL, and Vanilla HTML5/CSS3/JavaScript (ES6+) with the Web Fetch API**.
@@ -203,8 +211,8 @@ CREATE TABLE comments (
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/ApurvPandey0199/LuminaDashboard.git
-   cd LuminaDashboard
+   git clone https://github.com/ApurvPandey0199/LuminaDashboard-Through-Java-.git
+   cd LuminaDashboard-Through-Java-
    ```
 
 2. **Run the Application**:

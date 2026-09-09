@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Dashboard - Lumina Blog</title>
+    <meta name="description" content="Manage your authored articles, draft new publications, and view article metrics.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" id="dashboard-nav-logo">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span>Lumina<span style="color: var(--primary);">Console</span></span>
+            </a>
+
+            <nav>
+                <div class="nav-user">
+                    <a href="index.html" class="btn btn-secondary btn-sm" id="nav-view-feed">
+                        <span>🌐 View Public Feed</span>
+                    </a>
+                    <div class="user-avatar" id="author-avatar" title="Author">A</div>
+                    <button onclick="api.auth.logout()" class="btn btn-danger btn-sm" id="nav-logout-btn" title="Sign Out">
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <main class="container" style="padding: 2.5rem 1.5rem 4rem;">
+        <!-- Author Profile Banner -->
+        <section style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h1 id="author-greeting" style="font-size: 1.8rem; margin-bottom: 0.25rem;">Author Dashboard</h1>
+                <p id="author-email" style="color: var(--text-secondary); font-size: 0.95rem;">author@example.com</p>
+            </div>
+            <div>
+                <button onclick="document.getElementById('post-editor-card').scrollIntoView({behavior: 'smooth'})" class="btn btn-primary btn-sm">
+                    ✍️ Write New Article
+                </button>
+            </div>
+        </section>
+
+        <!-- Stats Counters -->
+        <section class="stats-grid" id="stats-section">
+            <div class="stat-card">
+                <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Total Articles</span>
+                <div class="stat-number" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <span style="color: #34d399; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Published</span>
+                <div class="stat-number" id="stat-published" style="color: #34d399;">0</div>
+            </div>
+            <div class="stat-card">
+                <span style="color: #fbbf24; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Drafts</span>
+                <div class="stat-number" id="stat-drafts" style="color: #fbbf24;">0</div>
+            </div>
+        </section>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;">
+            <!-- Article Editor Card (Create / Edit) -->
+            <section class="form-card" id="post-editor-card" style="max-width: 100%; margin: 0; padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 id="form-title" style="font-size: 1.4rem;">Create New Article</h2>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary btn-sm" style="display: none;">
+                        Cancel Edit
+                    </button>
+                </div>
+
+                <form id="post-form">
+                    <div class="form-group">
+                        <label for="post-title" class="form-label">Article Title *</label>
+                        <input type="text" id="post-title" class="form-control" placeholder="e.g. Mastering Spring Boot 3 Security and Hibernate ORM" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="form-group">
+                            <label for="post-category" class="form-label">Category</label>
+                            <select id="post-category" class="form-control">
+                                <option value="Java & Spring">Java & Spring</option>
+                                <option value="Database Design">Database Design</option>
+                                <option value="Frontend & Architecture">Frontend & Architecture</option>
+                                <option value="Cloud & DevOps">Cloud & DevOps</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-status" class="form-label">Publication Status</label>
+                            <select id="post-status" class="form-control">
+                                <option value="PUBLISHED">Published (Visible on Public Feed)</option>
+                                <option value="DRAFT">Draft (Author Dashboard Only)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="post-image-url" class="form-label">Cover Image URL (or upload below)</label>
+                        <input type="url" id="post-image-url" class="form-control" placeholder="https://images.unsplash.com/...">
+                        <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                            <input type="file" id="post-image-file" accept="image/*" style="font-size: 0.85rem; color: var(--text-secondary);">
+                        </div>
+                        <div id="image-preview-container" style="display: none; margin-top: 1rem;">
+                            <img id="image-preview" src="" alt="Preview" style="max-height: 180px; border-radius: var(--radius-md); object-fit: cover; border: 1px solid var(--border);">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="post-content" class="form-label">Article Content (Markdown supported) *</label>
+                        <textarea id="post-content" class="form-control" placeholder="Write your full technical article here..." rows="8" required style="min-height: 200px; font-family: monospace; font-size: 0.95rem;"></textarea>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                        <button type="submit" id="save-post-btn" class="btn btn-primary">
+                            Publish Article
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Author's Existing Posts -->
+            <section>
+                <h2 style="font-size: 1.4rem; margin-bottom: 1.25rem;">My Articles</h2>
+                <div id="dashboard-posts-list">
+                    <!-- Injected dynamically by dashboard.js -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="dashboard-empty" style="display: none; text-align: center; padding: 3rem 2rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border);">
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">You haven't written any articles yet.</p>
+                    <button onclick="document.getElementById('post-editor-card').scrollIntoView({behavior: 'smooth'})" class="btn btn-primary btn-sm">
+                        Create Your First Article
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal" role="dialog" aria-modal="true">
+        <div class="modal-card" style="max-width: 460px; text-align: center; padding: 2rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--danger);">⚠️</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Delete Article?</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                Are you sure you want to delete <strong id="delete-post-title" style="color: var(--text-primary);"></strong>? This action is permanent and cannot be undone.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button type="button" onclick="closeDeleteModal()" class="btn btn-secondary btn-sm">Cancel</button>
+                <button type="button" id="confirm-delete-btn" onclick="executeDeletePost()" class="btn btn-danger btn-sm">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

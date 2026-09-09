@@ -1,0 +1,25 @@
+# ==============================================================================
+# Render.com Blueprint Infrastructure Specification
+# 1-Click Deployment for Full-Stack Spring Boot + Vanilla JS Blog Application
+# ==============================================================================
+
+services:
+  # Web Service: Spring Boot REST API + Vanilla JS Static Frontend
+  - type: web
+    name: lumina-fullstack-blog
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    healthCheckPath: /api/posts
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina Blog - Full-Stack Engineering, Cloud Architecture & Design</title>
+    <meta name="description" content="Explore in-depth technical articles on Java 21, Spring Boot 3, MySQL database optimization, distributed architecture, and lightweight Vanilla JavaScript development.">
+    <meta name="author" content="Apurv Pandey">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" id="nav-brand-logo">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span>Lumina<span style="color: var(--primary);">Blog</span></span>
+            </a>
+
+            <nav>
+                <div class="nav-links" id="nav-auth">
+                    <!-- Injected dynamically by feed.js -->
+                    <a href="auth.html" class="nav-link" id="nav-login-link">Sign In</a>
+                    <a href="auth.html?mode=register" class="btn btn-primary btn-sm" id="nav-signup-link">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Header -->
+        <section class="hero" id="hero-section">
+            <div class="hero-badge">⚡ Spring Boot 3 + MySQL + Vanilla JS</div>
+            <h1 class="hero-title">Where <span>Engineering</span> Meets Architecture</h1>
+            <p class="hero-subtitle">
+                A high-performance, full-stack blogging platform built with Java 21, Spring Security stateless JWT authentication, MySQL relational schema integrity, and zero-framework Vanilla JavaScript.
+            </p>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="filter-bar" id="filter-section">
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="search-input" class="search-input" placeholder="Search by title, keyword, or summary..." autocomplete="off">
+            </div>
+
+            <div class="categories-pills" id="category-pills">
+                <button class="pill active" data-category="All" id="pill-all">All Topics</button>
+                <button class="pill" data-category="Java & Spring" id="pill-java">Java & Spring</button>
+                <button class="pill" data-category="Database Design" id="pill-db">Database Design</button>
+                <button class="pill" data-category="Frontend & Architecture" id="pill-frontend">Frontend & Arch</button>
+            </div>
+        </section>
+
+        <!-- Blog Posts Grid -->
+        <section>
+            <div class="posts-grid" id="posts-grid">
+                <!-- Injected dynamically by feed.js -->
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="empty-state" style="display: none; text-align: center; padding: 4rem 2rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border); margin-bottom: 3rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                <h3 style="margin-bottom: 0.5rem;">No matching articles found</h3>
+                <p style="color: var(--text-secondary); max-width: 450px; margin: 0 auto 1.5rem;">
+                    We couldn't find any articles matching your search criteria. Try a different query or select "All Topics".
+                </p>
+                <button onclick="document.getElementById('search-input').value=''; document.getElementById('pill-all').click();" class="btn btn-secondary btn-sm">
+                    Reset Filter
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Full Article Reader Modal -->
+    <div class="modal-overlay" id="article-modal" role="dialog" aria-modal="true">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+            <div id="modal-body">
+                <!-- Injected dynamically by feed.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Lumina Blog. Engineered by <strong>Apurv Pandey</strong> for Technical Assessment.</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">
+                Built with Java 21 • Spring Boot 3.3.2 • Spring Security • JWT • MySQL • Vanilla JavaScript
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/feed.js"></script>
+</body>
+</html>

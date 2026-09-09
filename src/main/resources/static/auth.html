@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - Lumina Blog</title>
+    <meta name="description" content="Secure registration and login with Spring Security, BCrypt password hashing, and JWT authorization.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="brand" id="auth-nav-logo">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <span>Lumina<span style="color: var(--primary);">Blog</span></span>
+            </a>
+
+            <nav>
+                <a href="index.html" class="nav-link">← Back to Public Feed</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Auth Card -->
+    <main class="container" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem;">
+        <div class="form-card" style="width: 100%; margin: 0 auto;">
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1 id="auth-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Welcome Back</h1>
+                <p id="auth-subtitle" style="color: var(--text-secondary); font-size: 0.95rem;">
+                    Sign in to access your author dashboard and manage your posts.
+                </p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab active" id="tab-login" role="tab">Sign In</button>
+                <button type="button" class="auth-tab" id="tab-register" role="tab">Create Account</button>
+            </div>
+
+            <!-- Login Form (POST /api/auth/login) -->
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="btn-login-submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+
+                <!-- Quick Evaluation Demo Buttons -->
+                <div style="margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); text-align: center;">
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        ⚡ Quick Test Demo Credentials (BCrypt Hashed):
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <button type="button" onclick="fillDemo('author')" class="btn btn-secondary btn-sm" id="btn-demo-author">
+                            Author Demo
+                        </button>
+                        <button type="button" onclick="fillDemo('admin')" class="btn btn-secondary btn-sm" id="btn-demo-admin">
+                            Admin Demo
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Register Form (POST /api/auth/register) -->
+            <form id="form-register" style="display: none;">
+                <div class="form-group">
+                    <label for="register-name" class="form-label">Full Name</label>
+                    <input type="text" id="register-name" class="form-control" placeholder="e.g. Apurv Pandey" required autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email" class="form-label">Email Address</label>
+                    <input type="email" id="register-email" class="form-control" placeholder="e.g. apurv@example.com" required autocomplete="email">
+                    <div class="form-help">Must be a unique, valid email address.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password" class="form-label">Password</label>
+                    <input type="password" id="register-password" class="form-control" placeholder="At least 6 characters" required autocomplete="new-password">
+                    <div class="form-help">Never stored as plain text. Hashed with BCryptPasswordEncoder.</div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="btn-register-submit" class="btn btn-primary btn-block">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

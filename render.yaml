@@ -11,10 +11,9 @@ services:
     dockerfilePath: Dockerfile
     plan: free
     region: oregon
-    healthCheckPath: /api/posts
     envVars:
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
+      - key: PORT
+        value: 8080
       - key: JWT_SECRET
         generateValue: true
       - key: SPRING_DATASOURCE_URL
